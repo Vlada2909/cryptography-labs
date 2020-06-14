@@ -54,13 +54,13 @@ def ctr_encrypt(input_b, key):
         res += bytes([x ^ y for x, y in zip(r, block)])
     return res
 
-def ctr_decrypt(c,key):
-    if len(c) % 16 != 8:
-        sys.exit("Uncorrect length of ciphertext: {}.".format(len(c)))
-    nonce = c[:8]
+def ctr_decrypt(cipher,key):
+    if len(cipher) % 16 != 8:
+        sys.exit("Uncorrect length of ciphertext: {}.".format(len(cipher)))
+    nonce = cipher[:8]
     blocks = []
-    for i in range(8, len(c), 16):
-        blocks.append(c[i: i + 16])
+    for i in range(8, len(cipher), 16):
+        blocks.append(cipher[i: i + 16])
     res = b''
     for i in range(len(blocks)):
         block = blocks[i]
